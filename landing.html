@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gontijo Viagens</title>
+    <link rel="icon" href="imagens/fivecon_gontijo.png">
+
+    <!-- Fonte Eurostile -->
+    <link href="https://fonts.cdnfonts.com/css/eurostile-extended" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+
+        /* TOPO */
+        .top-bar {
+            background:#4CAF50;
+            color:white;
+            padding:10px 20px;
+            display:flex;
+            justify-content:flex-end;
+            gap:20px;
+            font-size:14px;
+        }
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* NAV */
+        nav {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 40px;
+            background:#fff;
+            box-shadow:0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .logo {
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .logo-img { height: 40px; }
+
+        .logo-text {
+            display:flex;
+            flex-direction:column;
+            line-height:1.1;
+        }
+
+        .logo-top {
+            font-family: 'Eurostile Extended', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color:#000;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display:flex;
+            list-style:none;
+            gap:30px;
+        }
+
+        nav a {
+            text-decoration:none;
+            color:#2e7d32;
+            font-weight:bold;
+        }
+
+        /* MENU MOBILE */
+        #menu-btn {
+            display:none;
+            font-size:28px;
+            cursor:pointer;
+            color:#2e7d32;
+        }
+
+        #mobile-menu {
+            display:none;
+            flex-direction:column;
+            width:100%;
+            background:white;
+            padding:15px 0;
+            border-top:1px solid #ccc;
+        }
+
+        #mobile-menu a {
+            padding:12px 20px;
+            font-size:18px;
+            color:#2e7d32;
+            text-decoration:none;
+        }
+
+        /* CARROSSEL */
+        .carousel-container {
+            position:relative;
+            width:100%;
+            height:700px;
+            overflow:hidden;
+        }
+        .carousel-slide {
+            position:absolute;
+            top:0; left:0;
+            width:100%; height:100%;
+            opacity:0;
+            transition:opacity 1s ease-in-out;
+        }
+        .carousel-slide.active { opacity:1; }
+        .carousel-slide img {
+            width:100%; height:100%;
+            object-fit:cover;
+            filter:brightness(0.6);
+        }
+
+        .carousel-text {
+            position:absolute;
+            top:50%;
+            left:5%;
+            transform:translateY(-50%);
+            color:white;
+            font-size:50px;
+            font-weight:bold;
+            width:50%;
+            line-height:1.2em;
+        }
+
+        /* FORM */
+        .form-container {
+            display:flex;
+            justify-content:center;
+            gap:20px;
+            background:#fff;
+            padding:25px;
+            box-shadow:0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group label {
+            display:block;
+            margin-bottom:5px;
+            font-size:14px;
+            color:#666;
+        }
+
+        .form-group input {
+            width:200px;
+            padding:10px;
+            border-radius:5px;
+            border:1px solid #ccc;
+        }
+
+        .btn {
+            background:#4CAF50;
+            color:white;
+            border:none;
+            padding:15px 30px;
+            font-size:18px;
+            border-radius:8px;
+            cursor:pointer;
+            transition:0.3s;
+            height:fit-content;
+            margin-top:20px;
+        }
+        .btn:hover { background:#43a047; }
+
+        /* ------------------------- */
+        /*         MOBILE            */
+        /* ------------------------- */
+        @media (max-width: 900px) {
+
+            /* topo */
+            .top-bar {
+                flex-direction:column;
+                text-align:center;
+                gap:5px;
+            }
+
+            /* nav */
+            nav { padding:15px 20px; }
+
+            nav ul {
+                display:none;
+            }
+
+            #menu-btn {
+                display:block;
+            }
+
+            #mobile-menu {
+                display:none;
+            }
+
+            /* logo */
+            .logo-img { height:32px; }
+            .logo-top { font-size:16px; }
+
+            /* carrossel */
+            .carousel-container { height:400px; }
+
+            .carousel-text {
+                font-size:28px;
+                width:80%;
+            }
+
+            /* form */
+            .form-container {
+                flex-direction:column;
+                align-items:center;
+            }
+
+            .form-group input {
+                width:250px;
+            }
+
+            .btn {
+                width:250px;
+                margin-top:10px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .carousel-container { height:320px; }
+            .carousel-text { font-size:22px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="top-bar">
+        <a href="https://www.linkedin.com/company/empresa-gontijo-oficial" target="_blank">
+            <i class="fab fa-linkedin"></i> empresa-gontijo-oficial
+        </a>
+        <span>0800 728 0044</span>
+        <span>(31) 99455-1741</span>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <img src="imagens/icone_gontijo.png" alt="Logo Gontijo" class="logo-img">
+            <div class="logo-text">
+                <span class="logo-top">GONTIJO VIAÇÃO</span>
+            </div>
+        </div>
+
+        <!-- MENU DESKTOP -->
+        <ul>
+            <li><a href="#">Promoções</a></li>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Minha Conta</a></li>
+            <li><a href="#">Dúvidas</a></li>
+        </ul>
+
+        <!-- BOTÃO MOBILE -->
+        <span id="menu-btn"><i class="fas fa-bars"></i></span>
+    </nav>
+
+    <!-- MENU MOBILE -->
+    <div id="mobile-menu">
+        <a href="#">Promoções</a>
+        <a href="#">Serviços</a>
+        <a href="#">Blog</a>
+        <a href="#">Minha Conta</a>
+        <a href="#">Dúvidas</a>
+    </div>
+</header>
+
+<!-- CARROSSEL -->
+<div class="carousel-container" id="carousel">
+    <div class="carousel-slide active"><img src="imagens/Igreja_São_Francisco_de_Paula_(Ouro_Preto).jpg"></div>
+    <div class="carousel-slide"><img src="imagens/farol-da-barra.jpg"></div>
+    <div class="carousel-slide"><img src="imagens/Vista_aérea_lateral_de_Petrolina.jpg"></div>
+
+    <div class="carousel-text">
+        Viaje pelo Brasil <br>
+        E Veja Lugares Históricos <br>
+        Com Paisagens Surreais
+    </div>
+</div>
+
+<!-- FORM -->
+<div class="form-container">
+    <div class="form-group">
+        <label>Local de Partida</label>
+        <input type="text" placeholder="Insira Local ...">
+    </div>
+    <div class="form-group">
+        <label>Destino</label>
+        <input type="text" placeholder="Insira Local ...">
+    </div>
+    <div class="form-group">
+        <label>Dia da Ida</label>
+        <input type="text" placeholder="00/00/0000">
+    </div>
+    <div class="form-group">
+        <label>Retorno</label>
+        <input type="text" placeholder="00/00/0000">
+    </div>
+    <button class="btn">Calcule Preços</button>
+</div>
+
+<script>
+    /* CARROSSEL */
+    let slides = document.querySelectorAll('.carousel-slide');
+    let index = 0;
+
+    function showSlide(i) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[i].classList.add('active');
+    }
+
+    setInterval(() => {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    }, 4000);
+
+    /* MENU MOBILE */
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.style.display =
+            mobileMenu.style.display === "flex" ? "none" : "flex";
+    });
+</script>
+
+</body>
+</html>
