@@ -6,253 +6,201 @@
     <title>Gontijo Viagens</title>
      <link rel="shortcut icon" type="image/x-icon" href="fivecon_gontijo.png">
 
-    <!-- Fonte Eurostile -->
     <link href="https://fonts.cdnfonts.com/css/eurostile-extended" rel="stylesheet">
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        body { margin: 0; font-family: Arial, sans-serif; }
+        /* RESET & BASE */
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #f9f9f9; display: flex; flex-direction: column; min-height: 100vh; }
 
         /* TOPO */
         .top-bar {
-            background:#4CAF50;
-            color:white;
-            padding:10px 20px;
-            display:flex;
-            justify-content:flex-end;
-            gap:20px;
-            font-size:14px;
-        }
-        .top-bar a {
+            background: #2e7d32;
             color: white;
-            text-decoration: none;
+            padding: 8px 40px;
             display: flex;
+            justify-content: flex-end;
             align-items: center;
-            gap: 6px;
+            gap: 25px;
+            font-size: 13px;
         }
+        .top-bar a { color: white; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: opacity 0.3s; }
+        .top-bar a:hover { opacity: 0.8; }
 
         /* NAV */
         nav {
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:15px 40px;
-            background:#fff;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 40px; background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-img { height: 45px; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-top { font-family: 'Eurostile Extended', sans-serif; font-size: 22px; font-weight: 800; color: #1b5e20; letter-spacing: 1px; }
+
+        nav ul { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
+        nav a { text-decoration: none; color: #333; font-weight: 500; font-size: 15px; transition: color 0.3s; position: relative; }
+        nav a:hover { color: #2e7d32; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #2e7d32; transition: width 0.3s; }
+        nav a:hover::after { width: 100%; }
+
+        #menu-btn { display: none; font-size: 24px; cursor: pointer; color: #2e7d32; }
+        #mobile-menu { display: none; flex-direction: column; width: 100%; background: white; position: absolute; top: 100%; left: 0; box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 999; }
+        #mobile-menu a { padding: 15px 20px; font-size: 16px; color: #333; text-decoration: none; border-bottom: 1px solid #eee; }
+
+        /* CARROSSEL */
+        .carousel-container { position: relative; width: 100%; height: 600px; overflow: hidden; background: #000; }
+        .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
+        .carousel-slide.active { opacity: 1; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8); }
+        .carousel-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 48px; font-weight: bold; text-align: center; width: 80%; line-height: 1.2em; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); z-index: 10; }
+
+        /* FORMULÁRIO */
+        .form-container {
+            display: flex; justify-content: center; align-items: flex-end; gap: 15px;
+            background: #fff; padding: 30px; border-radius: 8px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            max-width: 1200px; margin: -60px auto 0 auto; /* Margin-bottom removida para empurrar o footer com espaçamento proprio */
+            position: relative; z-index: 20;
+        }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { margin-bottom: 8px; font-size: 12px; font-weight: bold; color: #555; text-transform: uppercase; }
+        .form-group input { width: 200px; padding: 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; background: #f8f8f8; outline: none; transition: 0.3s; }
+        .form-group input:focus { border-color: #2e7d32; background: #fff; box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1); }
+        .btn { background: #2e7d32; color: #ffffff; font-weight: normal; border: none; padding: 13px 30px; font-size: 16px; border-radius: 6px; cursor: pointer; transition: all 0.3s; height: 44px; text-transform: none; }
+        .btn:hover { background: #2e7d32; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+
+        /* ------------------------- */
+        /* FOOTER (NOVO)             */
+        /* ------------------------- */
+        footer {
+            background-color: #222;
+            color: #ccc;
+            margin-top: 80px; /* Espaço entre o form e o rodapé */
+            padding-top: 50px;
+            border-top: 5px solid #2e7d32; /* Detalhe verde Gontijo */
         }
 
-        .logo {
-            display:flex;
-            align-items:center;
-            gap:12px;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
         }
 
-        .logo-img { height: 40px; }
-
-        .logo-text {
-            display:flex;
-            flex-direction:column;
-            line-height:1.1;
+        .footer-section {
+            flex: 1;
+            min-width: 220px;
         }
 
-        .logo-top {
+        .footer-section h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
             font-family: 'Eurostile Extended', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            color:#000;
             letter-spacing: 1px;
         }
 
-        nav ul {
-            display:flex;
-            list-style:none;
-            gap:30px;
+        .footer-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
 
-        nav a {
-            text-decoration:none;
-            color:#2e7d32;
-            font-weight:bold;
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
         }
 
-        /* MENU MOBILE */
-        #menu-btn {
-            display:none;
-            font-size:28px;
-            cursor:pointer;
-            color:#2e7d32;
+        .footer-section ul li {
+            margin-bottom: 10px;
         }
 
-        #mobile-menu {
-            display:none;
-            flex-direction:column;
-            width:100%;
-            background:white;
-            padding:15px 0;
-            border-top:1px solid #ccc;
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
         }
 
-        #mobile-menu a {
-            padding:12px 20px;
-            font-size:18px;
-            color:#2e7d32;
-            text-decoration:none;
+        .footer-section ul li a:hover {
+            color: #ffc107; /* Amarelo no hover */
+            padding-left: 5px; /* Efeito de movimento */
         }
 
-        /* CARROSSEL */
-        .carousel-container {
-            position:relative;
-            width:100%;
-            height:700px;
-            overflow:hidden;
-        }
-        .carousel-slide {
-            position:absolute;
-            top:0; left:0;
-            width:100%; height:100%;
-            opacity:0;
-            transition:opacity 1s ease-in-out;
-        }
-        .carousel-slide.active { opacity:1; }
-        .carousel-slide img {
-            width:100%; height:100%;
-            object-fit:cover;
-            filter:brightness(0.6);
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: 0.3s;
         }
 
-        .carousel-text {
-            position:absolute;
-            top:50%;
-            left:5%;
-            transform:translateY(-50%);
-            color:white;
-            font-size:50px;
-            font-weight:bold;
-            width:50%;
-            line-height:1.2em;
+        .social-links a:hover {
+            background: #2e7d32;
+            transform: translateY(-3px);
         }
 
-        /* FORM */
-        .form-container {
-            display:flex;
-            justify-content:center;
-            gap:20px;
-            background:#fff;
-            padding:25px;
-            box-shadow:0 3px 10px rgba(0,0,0,0.1);
+        .footer-bottom {
+            background: #111;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 13px;
+            color: #777;
         }
 
-        .form-group label {
-            display:block;
-            margin-bottom:5px;
-            font-size:14px;
-            color:#666;
-        }
-
-        .form-group input {
-            width:200px;
-            padding:10px;
-            border-radius:5px;
-            border:1px solid #ccc;
-        }
-
-        .btn {
-            background:#4CAF50;
-            color:white;
-            border:none;
-            padding:15px 30px;
-            font-size:18px;
-            border-radius:8px;
-            cursor:pointer;
-            transition:0.3s;
-            height:fit-content;
-            margin-top:20px;
-        }
-        .btn:hover { background:#43a047; }
-
-        /* ------------------------- */
-        /*         MOBILE            */
-        /* ------------------------- */
+        /* RESPONSIVIDADE */
         @media (max-width: 900px) {
-
-            /* topo */
-            .top-bar {
-                flex-direction:column;
-                text-align:center;
-                gap:5px;
-            }
-
-            /* nav */
-            nav { padding:15px 20px; }
-
-            nav ul {
-                display:none;
-            }
-
-            #menu-btn {
-                display:block;
-            }
-
-            #mobile-menu {
-                display:none;
-            }
-
-            /* logo */
-            .logo-img { height:32px; }
-            .logo-top { font-size:16px; }
-
-            /* carrossel */
-            .carousel-container { height:400px; }
-
-            .carousel-text {
-                font-size:28px;
-                width:80%;
-            }
-
-            /* form */
-            .form-container {
-                flex-direction:column;
-                align-items:center;
-            }
-
-            .form-group input {
-                width:250px;
-            }
-
-            .btn {
-                width:250px;
-                margin-top:10px;
-            }
+            .top-bar { flex-direction: column; padding: 10px; gap: 5px; text-align: center; }
+            nav { padding: 15px 20px; }
+            nav ul { display: none; }
+            #menu-btn { display: block; }
+            .carousel-container { height: 400px; }
+            .carousel-text { font-size: 28px; width: 90%; }
+            
+            .form-container { flex-direction: column; align-items: stretch; margin: 0; border-radius: 0; gap: 20px; }
+            .form-group input { width: 100%; }
+            .btn { width: 100%; height: 50px; margin-top: 10px; }
+            
+            /* Footer mobile */
+            .footer-content { flex-direction: column; text-align: center; }
         }
-
         @media (max-width: 500px) {
-            .carousel-container { height:320px; }
-            .carousel-text { font-size:22px; }
+            .carousel-container { height: 300px; }
+            .carousel-text { font-size: 22px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="top-bar" style="align-items: center;">
+    <div class="top-bar">
         <a href="https://www.linkedin.com/company/empresa-gontijo-oficial" target="_blank">
             <i class="fab fa-linkedin"></i> empresa-gontijo-oficial
         </a>
-        <span>0800 728 0044</span>
-        <span>(31) 99455-1741</span>
+        <a href="#"><i class="fas fa-phone"></i> 0800 728 0044</a>
+        <a href="#"><i class="fab fa-whatsapp"></i> (31) 99455-1741</a>
     </div>
 
     <nav>
         <div class="logo">
-            <img src="src/icone_gontijo.png" alt="Logo Gontijo" class="logo-img">
+            <img src="src/icone_gontijo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
             <div class="logo-text">
-                <span class="logo-top">GONTIJO VIAÇÃO</span>
+                <span class="logo-top" style="color: black;">GONTIJO VIAÇÃO</span>
             </div>
         </div>
-
-        <!-- MENU DESKTOP -->
         <ul>
             <li><a href="#">Promoções</a></li>
             <li><a href="#">Serviços</a></li>
@@ -260,12 +208,9 @@
             <li><a href="#">Minha Conta</a></li>
             <li><a href="#">Dúvidas</a></li>
         </ul>
-
-        <!-- BOTÃO MOBILE -->
         <span id="menu-btn"><i class="fas fa-bars"></i></span>
     </nav>
 
-    <!-- MENU MOBILE -->
     <div id="mobile-menu">
         <a href="#">Promoções</a>
         <a href="#">Serviços</a>
@@ -275,39 +220,76 @@
     </div>
 </header>
 
-<!-- CARROSSEL -->
 <div class="carousel-container" id="carousel">
-    <div class="carousel-slide active"><img src="src/Igreja_São_Francisco_de_Paula_(Ouro_Preto).jpg"></div>
-    <div class="carousel-slide"><img src="src/Farol-da-Barra.jpg"></div>
-    <div class="carousel-slide"><img src="src/Vista_aérea_lateral_de_Petrolina.jpg"></div>
+    <div class="carousel-slide active"><img src="src/Igreja_São_Francisco_de_Paula_(Ouro_Preto).jpg" alt="Ouro Preto"></div>
+    <div class="carousel-slide"><img src="src/Farol-da-Barra.jpg" alt="Salvador"></div>
+    <div class="carousel-slide"><img src="src/Vista_aérea_lateral_de_Petrolina.jpg" alt="Petrolina"></div>
 
     <div class="carousel-text">
-        Viaje pelo Brasil <br>
-        E Veja Lugares Históricos <br>
-        Com Paisagens Surreais
+        Viaje pelo Brasil e veja<br>
+        Lugares Históricos com<br>
+        Paisagens Surreais
     </div>
 </div>
 
-<!-- FORM -->
 <div class="form-container">
     <div class="form-group">
         <label>Local de Partida</label>
-        <input type="text" placeholder="Insira Local ...">
+        <input type="text" placeholder="De onde você sai?">
     </div>
     <div class="form-group">
         <label>Destino</label>
-        <input type="text" placeholder="Insira Local ...">
+        <input type="text" placeholder="Para onde você vai?">
     </div>
     <div class="form-group">
         <label>Dia da Ida</label>
-        <input type="date" placeholder="00/00/0000">
+        <input type="date">
     </div>
     <div class="form-group">
         <label>Retorno</label>
-        <input type="date" placeholder="00/00/0000">
+        <input type="date">
     </div>
     <button class="btn">Calcule Preços</button>
 </div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Sobre a Gontijo</h3>
+            <p>Conectando o Brasil com conforto, segurança e pontualidade há décadas. Sua melhor experiência de viagem começa aqui.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Acesso Rápido</h3>
+            <ul>
+                <li><a href="#">Compra de Passagens</a></li>
+                <li><a href="#">Nossas Agências</a></li>
+                <li><a href="#">Trabalhe Conosco</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Atendimento</h3>
+            <p><i class="fas fa-phone-alt"></i> SAC: 0800 728 0044</p>
+            <p><i class="fas fa-deaf"></i> Deficiente Auditivo: 0800 728 0055</p>
+            <p><i class="fas fa-envelope"></i> sac@gontijo.com.br</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Siga-nos</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/Gontijo70anos"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/empresagontijo.oficial"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/empresa-gontijo-oficial"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        &copy; 2025 Empresa Gontijo de Transportes. Todos os direitos reservados. CNPJ: 00.000.000/0000-00
+    </div>
+</footer>
 
 <script>
     let slides = document.querySelectorAll('.carousel-slide');
@@ -321,9 +303,8 @@
     setInterval(() => {
         index = (index + 1) % slides.length;
         showSlide(index);
-    }, 4000);
+    }, 5000);
 
-    /* MENU MOBILE */
     const menuBtn = document.getElementById("menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
 
